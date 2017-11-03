@@ -1,0 +1,35 @@
+<nav>
+  <div class="logo">Library</div>
+  <ul class="navbar">
+    <li class="home-item-menu item-menu">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <div class="icon"></div>
+        <div class="title">Home</div>
+      </a>
+    </li>
+    <li class="book-item-menu item-menu">
+      <a href="/book/">
+        <div class="icon"></div>
+        <div class="title">Read</div>
+      </a>
+    </li>
+    <li class="write-item-menu item-menu">
+      <a routerLink="/write/" routerLinkActive="active">
+        <div class="icon"></div>
+        <div class="title">Write</div>
+      </a>
+    </li>
+  </ul>
+  <input class="search-general" type="text" placeholder="Search something to read, someone to chat with" />
+  <div class="panel-right">
+    <div class="notification">
+      <img src="assets/notification-on.svg" alt="">
+    </div>
+    <div class="profil-navbar">
+      <div class="profil-picture">
+        <img src="/assets/avatar.jpg" alt="">
+      </div>
+      <div class="profil-name">Perazd Potocol</div>
+    </div>
+  </div>
+</nav>

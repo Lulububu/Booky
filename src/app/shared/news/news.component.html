@@ -1,0 +1,33 @@
+<div class="news sticker" [ngClass]="{'small': size === 1, 'medium': size === 2}">
+  <h3 class="sticker-title">
+      {{newstitle}}
+  </h3>
+  <div class="sticker-content">
+      <div class="tag" *ngFor="let article of articles ">
+          <div class="tag-header">
+              <h4 class="tag-title">
+                  {{article.title}}
+              </h4>
+              <div class="tag-command">
+                  <img [src]="'/assets/share.svg'" alt="like">
+                  <img [src]="'/assets/like-' + (article.liked ? 'on' : 'off') + '.svg'" alt="like" (click)="like(article)">
+              </div>
+          </div>
+          <div class="tag-content">
+              {{article.content}}...
+              <a class="tag-detail-link" [href]="'/news/' + article.id">Read more</a>
+          </div>
+          <div class="tag-footer">
+              <div class="author">
+                  <div class="profil-picture">
+                      <img [src]="article.author.picture" alt="">
+                  </div>
+                  <div class="profil-name">{{article.author.name}} {{article.author.surname}}</div>
+              </div>
+              <div class="date">
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

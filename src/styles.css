@@ -1,0 +1,82 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  background-color: #f8f8f8;
+  color: #3c3c3c;
+}
+
+.logo {
+  display: inline-block;
+  margin-left: 50px;
+  margin-right: 50px;
+  font-size: 40px;
+  color: #333333;
+}
+
+a {
+  text-decoration: none;
+}
+
+.panel-right {
+  float: right;
+  margin-top: 5px;
+}
+
+.panel-right div {
+  display: inline-block;
+}
+
+.notification img {
+  cursor: pointer;
+}
+
+.notification img {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+
+.profil-navbar {
+  margin-left: 30px;
+  cursor: pointer;
+}
+
+.profil-navbar .profil-picture {
+  vertical-align: sub;
+}
+
+.profil-picture img {
+  width: 45px;
+  -webkit-mask-image: url(/assets/mask-profile-picture.svg);
+  -webkit-mask-mode: luminance;
+  mask: url(/assets/mask-profile-picture.svg) luminance;
+}
+
+.profil-name {
+  vertical-align: middle;
+  height: 45px;
+  margin-left: 15px;
+  margin-right: 100px;
+}
+
+.profil-navbar .profil-name::after {
+  position: relative;
+  top: 25%;
+  right: -19px;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 0;
+  width: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #000;
+  content: '';
+}
+
+.container {
+  margin: 35px;
+}
