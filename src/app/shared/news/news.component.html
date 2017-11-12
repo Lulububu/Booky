@@ -3,6 +3,7 @@
       {{newstitle}}
   </h3>
   <div class="sticker-content">
+      <div *ngIf="!(articles?.length > 0)" class="sticker-placeholder">No content could be found :(</div>
       <div class="tag" *ngFor="let article of articles ">
           <div class="tag-header">
               <h4 class="tag-title">

@@ -21,7 +21,7 @@
     </li>
   </ul>
   <input class="search-general" type="text" placeholder="Search something to read, someone to chat with" />
-  <div class="panel-right">
+  <div class="panel-right" *ngIf="user">
     <div class="notification">
       <img src="assets/notification-on.svg" alt="">
     </div>
@@ -32,4 +32,5 @@
       <div class="profil-name">Perazd Potocol</div>
     </div>
   </div>
+  <app-connect class="panel-right" *ngIf="!user"></app-connect>
 </nav>

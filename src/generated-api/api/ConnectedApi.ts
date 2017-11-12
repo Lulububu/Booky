@@ -68,12 +68,27 @@ export class ConnectedApi {
     }
 
     /**
-     * adds an inventory item
-     * Create a news.
-     * @param news News item to add
+     * adds an article
+     * Create an article.
+     * @param article Article item to add
      */
-    public addNews(news?: models.News, extraHttpRequestParams?: any): Observable<{}> {
-        return this.addNewsWithHttpInfo(news, extraHttpRequestParams)
+    public addArticles(article?: models.Article, extraHttpRequestParams?: any): Observable<{}> {
+        return this.addArticlesWithHttpInfo(article, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json();
+                }
+            });
+    }
+
+    /**
+     * get user detail
+     * Retriev the current user informations. 
+     */
+    public getUser(extraHttpRequestParams?: any): Observable<Array<models.User>> {
+        return this.getUserWithHttpInfo(extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -85,12 +100,12 @@ export class ConnectedApi {
 
 
     /**
-     * adds an inventory item
-     * Create a news.
-     * @param news News item to add
+     * adds an article
+     * Create an article.
+     * @param article Article item to add
      */
-    public addNewsWithHttpInfo(news?: models.News, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/news`;
+    public addArticlesWithHttpInfo(article?: models.Article, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + `/article`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -114,7 +129,45 @@ export class ConnectedApi {
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Post,
             headers: headers,
-            body: news == null ? '' : JSON.stringify(news), // https://github.com/angular/angular/issues/10612
+            body: article == null ? '' : JSON.stringify(article), // https://github.com/angular/angular/issues/10612
+            search: queryParameters
+        });
+        
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * get user detail
+     * Retriev the current user informations. 
+     */
+    public getUserWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + `/user`;
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+        
+            
+
+
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Get,
+            headers: headers,
             search: queryParameters
         });
         

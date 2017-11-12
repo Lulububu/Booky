@@ -68,14 +68,30 @@ export class PublicApi {
     }
 
     /**
+     * create a user (if the user does not already exist) and connect
+     * Create a user.
+     * @param user user to create
+     */
+    public createUser(user?: models.User, extraHttpRequestParams?: any): Observable<{}> {
+        return this.createUserWithHttpInfo(user, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json();
+                }
+            });
+    }
+
+    /**
      * get news article
-     * You can get all news or just a subset by using filter params. News are ordered by reverse chronological order. 
-     * @param tagsFilter Pass optional tags to filter the news you get. Seperate tags with comma \&quot;,\&quot;.
+     * You can get all articles or just a subset by using filter params. Article are ordered by reverse chronological order. 
+     * @param tagsFilter Pass optional tags to filter the article you get. Seperate tags with comma \&quot;,\&quot;.
      * @param skip number of records to skip for pagination
      * @param limit maximum number of records to return
      */
-    public getNews(tagsFilter?: string, skip?: number, limit?: number, extraHttpRequestParams?: any): Observable<Array<models.News>> {
-        return this.getNewsWithHttpInfo(tagsFilter, skip, limit, extraHttpRequestParams)
+    public getArticles(tagsFilter?: string, skip?: number, limit?: number, extraHttpRequestParams?: any): Observable<Array<models.Article>> {
+        return this.getArticlesWithHttpInfo(tagsFilter, skip, limit, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -87,14 +103,56 @@ export class PublicApi {
 
 
     /**
+     * create a user (if the user does not already exist) and connect
+     * Create a user.
+     * @param user user to create
+     */
+    public createUserWithHttpInfo(user?: models.User, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + `/user`;
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            'application/json'
+        ];
+        
+            
+
+        headers.set('Content-Type', 'application/json');
+
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Post,
+            headers: headers,
+            body: user == null ? '' : JSON.stringify(user), // https://github.com/angular/angular/issues/10612
+            search: queryParameters
+        });
+        
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
      * get news article
-     * You can get all news or just a subset by using filter params. News are ordered by reverse chronological order. 
-     * @param tagsFilter Pass optional tags to filter the news you get. Seperate tags with comma \&quot;,\&quot;.
+     * You can get all articles or just a subset by using filter params. Article are ordered by reverse chronological order. 
+     * @param tagsFilter Pass optional tags to filter the article you get. Seperate tags with comma \&quot;,\&quot;.
      * @param skip number of records to skip for pagination
      * @param limit maximum number of records to return
      */
-    public getNewsWithHttpInfo(tagsFilter?: string, skip?: number, limit?: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/news`;
+    public getArticlesWithHttpInfo(tagsFilter?: string, skip?: number, limit?: number, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + `/article`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845

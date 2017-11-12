@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Author } from '../../shared/news/model/author.model';
-import { PublicApi, News } from '../../../generated-api/index';
+import { PublicApi, Article } from '../../../generated-api/index';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +9,16 @@ import { PublicApi, News } from '../../../generated-api/index';
   providers: [PublicApi]
 })
 export class HomeComponent implements OnInit {
-  newsContent: News[];
-  socialContent: News[];
+  newsContent: Article[];
+  socialContent: Article[];
   publicApi: PublicApi;
+  
   constructor(publicApi: PublicApi) { 
     this.publicApi = publicApi;
   }
 
   ngOnInit() {
-    this.publicApi.getNews().subscribe(data => {this.newsContent = data});
+    this.publicApi.getArticles().subscribe(data => {this.newsContent = data});
    }
 
 }

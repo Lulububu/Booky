@@ -24,23 +24,23 @@
 
 import * as models from './models';
 
-export interface News {
-    id?: string;
+export interface User {
+    name: string;
 
-    title: string;
+    mail: string;
 
-    releaseDate?: string;
+    surname?: string;
 
-    author: models.Author;
-
-    /**
-     * Content of the article formatted in markdown.
-     */
-    content: string;
+    picture: string;
 
     /**
-     * If the user is connected, the liked value show if he has liked the article.
+     * Defin where the user come from. Where he connected from.
      */
-    liked?: boolean;
+    type: string;
+
+    /**
+     * Unique id given by the identity provider.
+     */
+    id: string;
 
 }

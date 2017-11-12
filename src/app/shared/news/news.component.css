@@ -105,3 +105,8 @@
     width: 100%;
   }
 }
+
+.sticker-placeholder {
+  text-align: center;
+  margin-bottom: 21px;
+}
